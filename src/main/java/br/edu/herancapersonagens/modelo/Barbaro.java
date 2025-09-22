@@ -22,5 +22,5 @@ public class Barbaro extends Guerreiro{
 
     //--------------------------ESPECIAL
     public void burst(){this.setVida(this.burst);
-    this.setDano(this.getDano();}
+    this.setDano(this.getDano());}
 }

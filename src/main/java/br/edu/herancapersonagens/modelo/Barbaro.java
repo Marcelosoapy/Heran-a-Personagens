@@ -1,7 +1,7 @@
 package modelo;
 
 public class Barbaro extends Guerreiro{
-    private int burst = 60;
+    private int burst = 70;
 
     //--------------------------CONSTRUTOR
     public Barbaro(String nome, String poder, int dano, String classe) {
@@ -21,7 +21,6 @@ public class Barbaro extends Guerreiro{
     }
 
     //--------------------------ESPECIAL
-    public void burst(){
-        this.setVida(this.burst);
-    }
+    public void burst(){this.setVida(this.burst);
+    this.setDano(this.getDano();}
 }

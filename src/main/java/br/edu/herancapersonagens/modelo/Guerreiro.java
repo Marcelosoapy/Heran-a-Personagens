@@ -17,21 +17,22 @@ public abstract class Guerreiro{
         this.dano = dano;
         this.classe = classe;
     }
-    //--------------------- PODER
+    //---------------------- PODER
     public String getPoder() {
         return poder;
     }
     public void setPoder(String poder) {
         this.poder = poder;
     }
-    //--------------------- VIDA
+    //---------------------- VIDA
     public int getVida() {
         return vida;
     }
     public void setVida(int vida) {
         this.vida = vida;
     }
-    //----------------------DANO --------
+
+    //---------------------- DANO
     public int getDano() {
         return dano;
     }
@@ -39,11 +40,13 @@ public abstract class Guerreiro{
         this.dano = dano;
     }
 
+    //---------------------- CLASSE
     public String getClasse() {
         return classe;
     }
 
     //------------------------ ESPECIAIS
 
-    public abstract void atacar();
+    public abstract void atacar(Guerreiro alvo);
+    public abstract void sofrerDano (int danoSofrido);
 }

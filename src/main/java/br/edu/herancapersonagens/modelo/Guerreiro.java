@@ -45,5 +45,6 @@ public abstract class Guerreiro{
 
     //------------------------ ESPECIAIS
 
-    public abstract void atacar();
+    public abstract void atacar(Guerreiro alvo);
+    public abstract void sofrerDano (int danoSofrido);
 }

@@ -16,8 +16,8 @@ public class Mago extends Guerreiro{
     }
 
     @Override
-    public void sofrerDano(int dano ){
-        this.setVida( getVida() - dano );
+    public void sofrerDano(int danoSofrido ){
+        this.setVida( getVida() - danoSofrido );
     }
 
 //--------------------------ESPECIAL

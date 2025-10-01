@@ -17,6 +17,11 @@ public abstract class Guerreiro{
         this.dano = dano;
         this.classe = classe;
     }
+    //---------------------- NOME
+    public String getNome() {
+        return nome;
+    }
+
     //---------------------- PODER
     public String getPoder() {
         return poder;

@@ -12,6 +12,9 @@ public class Main {
       Scanner input= new Scanner(System.in);
       int optionClasse;
 
+      Guerreiro[] container= new Guerreiro[1];
+      container[0] = null;
+
       System.out.println("-°*--°*--°*--°*--°*--°*--°*--°*--°*--°*--°*-");
       System.out.println(" Bem vindo a zona de criação de personagens ");
       System.out.println("    Crie o personagem para sua aventura     ");
@@ -31,46 +34,31 @@ public class Main {
 
       Mago m1 = null;
       Barbaro b1= null;
-      //Paladino p1;
+      Paladino p1 = null;
+
+      System.out.println("--------------------------------------------");
+      System.out.println("Qual sera o nome do(a) personagem?");
+      nomePerson = input.nextLine();
+      System.out.println("Qual sera o poder do(a) personagem?");
+      poderPerson = input.nextLine();
+      System.out.println("Qual sera a capacidade de dano do(a) personagem?");
+      danoPerson = input.nextInt();
+      System.out.println("--------------------------------------------");
 
       switch (optionClasse) {
           case 1:
-              System.out.println("--------------------------------------------");
-              System.out.println("Qual sera o nome de seu Mago");
-              nomePerson = input.nextLine();
-              System.out.println("Qual sera o poder de seu Mago");
-              poderPerson = input.nextLine();
-              System.out.println("Qual sera a capacidade de dano de seu Mago");
-              danoPerson = input.nextInt();
-              System.out.println("--------------------------------------------");
-
               m1 = new Mago(nomePerson, poderPerson, danoPerson, "Mago");
+              container[0] = m1;
 
               break;
           case 2:
-              System.out.println("--------------------------------------------");
-              System.out.println("Qual sera o nome de seu Barbaro");
-              nomePerson = input.nextLine();
-              System.out.println("Qual sera o poder de seu Barbaro");
-              poderPerson = input.nextLine();
-              System.out.println("Qual sera a capacidade de dano de seu Barbaro");
-              danoPerson = input.nextInt();
-              System.out.println("--------------------------------------------");
-
               b1 = new Barbaro(nomePerson, poderPerson, danoPerson, "Barbaro");
+              container[0] = b1;
 
               break;
           case 3:
-              System.out.println("--------------------------------------------");
-              System.out.println("Qual sera o nome de seu paladino");
-              nomePerson = input.nextLine();
-              System.out.println("Qual sera o poder de seu Paladino");
-              poderPerson = input.nextLine();
-              System.out.println("Qual sera a capacidade de dano de seu Paladino");
-              danoPerson = input.nextInt();
-              System.out.println("--------------------------------------------");
-
-              //p1= new Paladino(nomePerson,poderPerson,danoPerson,"Mago");
+              p1= new Paladino(nomePerson,poderPerson,danoPerson,"Mago");
+              container[0] = p1;
       }
 
 
@@ -87,23 +75,26 @@ public class Main {
         System.out.println("| 2- batalhar! ");
         System.out.println("| 3- exibir status do personagem");
         System.out.println("| 4- sair!");
+
         option = input.nextInt();
         input.nextLine();
+        System.out.println(" ");
 
         switch (option){
             case 1 -> {
 
-                switch (optionClasse){
+                switch (optionClasse) {
                     case 1:
                         operacao.upgrade(m1, optionClasse);
                         continue;
                     case 2:
                         operacao.upgrade(b1, optionClasse);
                         continue;
-                    /*case 3:
+                    case 3:
                         operacao.upgrade(p1, optionClasse);
-                        continue;*/
+
                 }
+
 
             } // upgrades
 
@@ -113,134 +104,50 @@ public class Main {
                 System.out.println("Esta preparado para conhecer seu oponente?");
                 System.out.println("-----------------------------------------");
 
-
                 Random aleatorio= new Random();
-                int alvo;
-                int iniciativa;
+                int opcaoAlvo;
 
-                if(optionClasse == 1) { //mago
-                    alvo = aleatorio.nextInt(2);
+                opcaoAlvo = aleatorio.nextInt(3);
 
-                    switch (alvo){
-                        case 0:
-                            personagem= new Barbaro("Devorador de almas","abalo sismico",40,"barbaro");
-                            System.out.println("- seu inimigo serei eu:");
-                            System.out.println("Devorador de almas |"+personagem.getVida()+" hp |"+personagem.getDano()+" dano");
-                            System.out.println(" ");
-                            System.out.println("Agora iremos saber quem irá ter a atacar ");
-
-                            do {
-                                iniciativa= aleatorio.nextInt(2);
-                                switch (iniciativa) {
-                                    case 0:
-                                        System.out.println("Sua vez:");
-                                        System.out.println( personagem.getPoder() + " !!!");
-                                        personagem.setVida( personagem.getVida() - personagem.getDano() );
-
-                                        System.out.println("Devorador de almas | -" + personagem.getDano() + " hp");
-                                        System.out.println("Devorador de almas | " + personagem.getVida() + " hp total");
-                                        System.out.println("---------------------------------------");
-                                        continue;
-
-                                    case 1:
-                                        System.out.println("Devorador de almas:");
-                                        System.out.println(personagem.getPoder() + " !!!");
-                                        personagem.setVida( personagem.getVida() - personagem.getDano() );
-
-                                        System.out.println("Você | -" + personagem.getDano() + " hp");
-                                        System.out.println("Você | " + personagem.getVida() + " hp total");
-                                        System.out.println("---------------------------------------");
-                                }
-
-                            }while (personagem.getVida() > 0 && personagem.getVida() > 0);
-
-                            if(personagem.getVida() > 0 ){
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("Parabens você foi o vencedor do embate");
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("recompensas: +vida e +dano");
-                                personagem.setVida(60);
-                                personagem.setDano( personagem.getDano() + 10);
-
-                            }else{
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("        Parabens você Perdeu!        ");
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                            }
-
-                            continue;
-
-                        case 1:
-                            /*
-                            personagem= new Barbaro("Devorador de almas","abalo sismico",40,"barbaro");
-                            p1= new Paladino("bispo da meia noite","Louvor estridente",50,"paladino");
-                            System.out.println("- seu inimigo serei eu:");
-                            System.out.println("bispo da meia noite |"+p1.getVida()+" hp |"+p1.getDano()+" dano");
-                            System.out.println(" ");
-                            System.out.println("Agora iremos saber quem irá ter a atacar ");
-
-                            do {
-                                iniciativa= aleatorio.nextInt(2);
-                                switch (iniciativa) {
-                                    case 0:
-                                        System.out.println("Sua vez:");
-                                        System.out.println( personagem.getPoder() + " !!!");
-                                        p1.setVida( p1.getVida() - personagem.getDano() );
-
-                                        System.out.println("bispo da meia noite | -" + personagem.getDano() + " hp");
-                                        System.out.println("bispo da meia noite | " + p1.getVida() + " hp total");
-                                        System.out.println("---------------------------------------");
-
-                                        continue;
-
-                                    case 1:
-                                        System.out.println("bispo da meia noite:");
-                                        System.out.println(p1.getPoder() + " !!!");
-                                        personagem.setVida( personagem.getVida() - p1.getDano() );
-
-                                        System.out.println("Você | -" + p1.getDano() + " hp");
-                                        System.out.println("Você | " + personagem.getVida() + " hp total");
-                                        System.out.println("---------------------------------------");
-                                }
-
-                            }while (personagem.getVida() > 0 && p1.getVida() > 0);
-
-                            if(personagem.getVida() > 0 ){
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("Parabens você foi o vencedor do embate");
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("recompensas: +vida e +dano");
-                                personagem.setVida(60);
-                                personagem.setDano( personagem.getDano() + 10);
-
-                            }else{
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("        Parabens você Perdeu!        ");
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                            }
-                            */
+                switch (opcaoAlvo){
+                    case 0 ->{
+                        Mago inimigo = new Mago("bruxaria pura","mandinga severa", 10, "Mago");
+                        operacao.batalha(container[0], inimigo);
                     }
-
-                } else if (optionClasse == 2) {
-
+                    case 1 ->{
+                        Barbaro inimigo = new Barbaro("Devorador de almas", "abalo sismico", 40, "barbaro");
+                        operacao.batalha(container[0], inimigo);
+                    }
+                    case 2 ->{
+                        Paladino inimigo = new Paladino("bispo da meia noite", "Louvor estridente", 50, "paladino");
+                        operacao.batalha(container[0], inimigo);
+                    }
                 }
 
             }
 
             case 3->{
-
+                System.out.println("Ficha----------------------------");
+                System.out.println("nome:"+ container[0].getNome());
+                System.out.println("vida:"+ container[0].getVida());
+                System.out.println("dano:"+ container[0].getDano());
+                System.out.println("poder:"+ container[0].getPoder());
+                System.out.println("---------------------------------");
             }
 
-            case 4->{}
-
-            case 5->{}
+            case 4->{
+                System.out.println("-'°'--'°'--'°'--'°'--'°'--'°'-");
+                System.out.println(" Aqui se incerra sua jornada ");
+                System.out.println("     Até logo guerreiro!     ");
+                System.out.println("-'--'--'--'--'--'--'--'--'--'-");
+            }
         }
 
       }while (option !=5);
 
 
 
-  }
+    }
 
   public void upgrade(Guerreiro personagem, int optionClasse){
 
@@ -258,8 +165,10 @@ public class Main {
                 System.out.println("| 1- Elixir de cura | +10 de vida");
                 System.out.println("| 2- Cajado de fogo | +15 de dano");
                 System.out.println("| 3- Cajado de gelo | +10 de dano");
+
                 optionArtefatos = input.nextInt();
                 input.nextLine();
+                System.out.println(" ");
 
                 artefato1 = 15;
                 artefato2 = 15;
@@ -270,8 +179,10 @@ public class Main {
                 System.out.println("| 1- escudo de aço| +10 de vida");
                 System.out.println("| 2- manopla de ouro | +25 de dano");
                 System.out.println("| 3- machado de gelo | +30 de dano");
+
                 optionArtefatos = input.nextInt();
                 input.nextLine();
+                System.out.println(" ");
 
                 artefato1 = 10;
                 artefato2 = 25;
@@ -283,13 +194,16 @@ public class Main {
                 System.out.println("| 1- unção divina | +25 de vida");
                 System.out.println("| 2- grimório sagrado | +40 de dano");
                 System.out.println("| 3- crus de platina | +45 de dano");
+
                 optionArtefatos = input.nextInt();
                 input.nextLine();
+                System.out.println(" ");
 
                 artefato1 = 10;
                 artefato2 = 40;
                 artefato3 = 45;
         }
+
 
         switch (optionArtefatos) {
             case 1:
@@ -305,128 +219,67 @@ public class Main {
                 System.out.println("+++Dano");
                 break;
         }
-
+        System.out.println(" ");
   }
 
 
-  public void batalha(Guerreiro personagem){
-
-      System.out.println("~~~~ 0--|=========> * <=========|--0 ~~~~");
-      System.out.println("       Benvindo ao campo de batalha!     ");
-      System.out.println("Esta preparado para conhecer seu oponente?");
-      System.out.println("-----------------------------------------");
-
+  public void batalha(Guerreiro personagem, Guerreiro inimigo ){
 
       Random aleatorio= new Random();
-      int opcaoAlvo;
       int iniciativa;
 
-      if(personagem.getClasse().contains("Mago")) { //mago
-          opcaoAlvo = aleatorio.nextInt(2);
+      //Barbaro inimigo = new Barbaro("Devorador de almas", "abalo sismico", 40, "barbaro");
+      System.out.println("- seu inimigo serei eu:");
+      System.out.println( inimigo.getNome() + " |" + inimigo.getVida() + " hp |" + inimigo.getDano() + " dano");
+      System.out.println(" ");
+      System.out.println("--- --- --- --- --- --- --- --- ---");
+      System.out.println("Agora iremos saber quem irá atacar ");
 
-          switch (opcaoAlvo){
+
+      do {
+          iniciativa = aleatorio.nextInt(2);
+
+          switch (iniciativa) {
               case 0:
-                  Barbaro inimigo= new Barbaro("Devorador de almas","abalo sismico",40,"barbaro");
-                  System.out.println("- seu inimigo serei eu:");
-                  System.out.println("Devorador de almas |"+inimigo.getVida()+" hp |"+inimigo.getDano()+" dano");
-                  System.out.println(" ");
-                  System.out.println("Agora iremos saber quem irá ter a atacar ");
+                  System.out.println("Sua vez:");
+                  System.out.println( personagem.getPoder() + " !!!");
+                  inimigo.setVida( inimigo.getVida() - personagem.getDano());
 
-                  do {
-                      iniciativa= aleatorio.nextInt(2);
-
-                      switch (iniciativa) {
-                          case 0:
-                              System.out.println("Sua vez:");
-                              System.out.println( personagem.getPoder() + " !!!");
-                              inimigo.setVida( inimigo.getVida() - personagem.getDano() );
-
-                              System.out.println("Devorador de almas | -" + inimigo.getDano() + " hp");
-                              System.out.println("Devorador de almas | " + inimigo.getVida() + " hp total");
-                              System.out.println("---------------------------------------");
-                              continue;
-
-                          case 1:
-                              System.out.println("Devorador de almas:");
-                              System.out.println(inimigo.getPoder() + " !!!");
-                              personagem.setVida( personagem.getVida() - inimigo.getDano() );
-
-                              System.out.println("Você | -" + personagem.getDano() + " hp");
-                              System.out.println("Você | " + personagem.getVida() + " hp total");
-                              System.out.println("---------------------------------------");
-                      }
-
-                  }while (inimigo.getVida() >= 0 && personagem.getVida() >= 0);
-
-                  if(inimigo.getVida() >= 0 ){
-                      System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                      System.out.println("Parabens você foi o vencedor do embate");
-                      System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                      System.out.println("recompensas: +vida e +dano");
-                      personagem.setVida(60);
-                      personagem.setDano( personagem.getDano() + 10);
-
-                  }else{
-                      System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                      System.out.println("        Parabens você Perdeu!        ");
-                      System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                  }
-
-                  break;
+                  System.out.println( inimigo.getNome() + " | -" + personagem.getDano() + " hp");
+                  System.out.println( inimigo.getNome() + " | " + inimigo.getVida() + " hp total");
+                  System.out.println("---------------------------------------");
+                  continue;
 
               case 1:
+                  System.out.println( inimigo.getNome() + ":");
+                  System.out.println( inimigo.getPoder() + " !!!");
+                  personagem.setVida( personagem.getVida() - inimigo.getDano());
 
-                            alvo= new Paladino("bispo da meia noite","Louvor estridente",50,"paladino");
-                            System.out.println("- seu inimigo serei eu:");
-                            System.out.println("bispo da meia noite |"+alvo.getVida()+" hp |"+alvo.getDano()+" dano");
-                            System.out.println(" ");
-                            System.out.println("Agora iremos saber quem irá ter a atacar ");
-
-                            do {
-                                iniciativa= aleatorio.nextInt(2);
-                                switch (iniciativa) {
-                                    case 0:
-                                        System.out.println("Sua vez:");
-                                        System.out.println( personagem.getPoder() + " !!!");
-                                        p1.setVida( p1.getVida() - personagem.getDano() );
-
-                                        System.out.println("bispo da meia noite | -" + personagem.getDano() + " hp");
-                                        System.out.println("bispo da meia noite | " + p1.getVida() + " hp total");
-                                        System.out.println("---------------------------------------");
-
-                                        continue;
-
-                                    case 1:
-                                        System.out.println("bispo da meia noite:");
-                                        System.out.println(p1.getPoder() + " !!!");
-                                        personagem.setVida( personagem.getVida() - p1.getDano() );
-
-                                        System.out.println("Você | -" + p1.getDano() + " hp");
-                                        System.out.println("Você | " + personagem.getVida() + " hp total");
-                                        System.out.println("---------------------------------------");
-                                }
-
-                            }while (personagem.getVida() > 0 && p1.getVida() > 0);
-
-                            if(personagem.getVida() > 0 ){
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("Parabens você foi o vencedor do embate");
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("recompensas: +vida e +dano");
-                                personagem.setVida(60);
-                                personagem.setDano( personagem.getDano() + 10);
-
-                            }else{
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                                System.out.println("        Parabens você Perdeu!        ");
-                                System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
-                            }
-                            */
+                  System.out.println("Você | -" + inimigo.getDano() + " hp");
+                  System.out.println("Você | " + personagem.getVida() + " hp total");
+                  System.out.println("---------------------------------------");
+                  System.out.println(" ");
           }
 
-      } else if (optionClasse == 2) {
+      } while (inimigo.getVida() >= 0 && personagem.getVida() >= 0);
 
+
+
+      if(personagem.getVida() > 0 ){
+          System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
+          System.out.println("Parabens você foi o vencedor do embate");
+          System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
+          System.out.println("recompensas: +vida e +dano");
+          personagem.setVida(60);
+          personagem.setDano( personagem.getDano() + 10);
+
+      }else{
+          System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
+          System.out.println("        Parabens você Perdeu!        ");
+          System.out.println("-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-'°*°'-");
+          System.out.println(" ");
       }
+
 
   }
 }

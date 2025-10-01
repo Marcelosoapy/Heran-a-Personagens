@@ -137,7 +137,7 @@ public class Main {
 
             case 4->{
                 System.out.println("-'°'--'°'--'°'--'°'--'°'--'°'-");
-                System.out.println(" Aqui se incerra sua jornada ");
+                System.out.println(" Aqui se encerra sua jornada! ");
                 System.out.println("     Até logo guerreiro!     ");
                 System.out.println("-'--'--'--'--'--'--'--'--'--'-");
             }
